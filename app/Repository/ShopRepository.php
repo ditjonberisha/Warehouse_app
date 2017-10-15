@@ -14,16 +14,10 @@ class ShopRepository
         $shop->users()->attach($request->user()->id);
     }
 
-    public function update($id, Request $request)
+    public function update($shop, Request $request)
     {
-        $shop = Shop::findOrFail($id);
         $shopData = $request->toArray();
         $shop->update($shopData);
-    }
-
-    public function delete($id)
-    {
-        Shop::destroy($id);
     }
 }
 ?>

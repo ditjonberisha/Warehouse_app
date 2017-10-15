@@ -8,12 +8,11 @@ class Shop extends Model
 {
     protected $fillable = ['name', 'country', 'city', 'active'];
 
-    protected $rules =
+    const rules =
         [
-            'name' => 'required',
-            'country' => 'required',
-            'city'  => 'required',
-            'active' => 'required'
+            'name' => 'required|alpha',
+            'country' => 'required|alpha',
+            'city'  => 'required|alpha',
         ];
 
     public function phones()

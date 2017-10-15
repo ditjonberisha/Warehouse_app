@@ -6,11 +6,13 @@ use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Models\Enum\PhoneConditionEnum;
 use App\Helpers\FileHelper;
+use Illuminate\Support\Facades\Auth;
 
 class PhoneRepository
 {
-    public function getPhones(Request $request, $myShops)
+    public function getPhones(Request $request)
     {
+        $myShops = Auth::user()->myShops();
         $GLOBALS['search'] = $request->search;
         if(!empty($GLOBALS['search']))
         {
@@ -21,8 +23,7 @@ class PhoneRepository
               whereOr('condition', 'LIKE', "%{$GLOBALS['search']}%")->
               whereOr('customer_email', 'LIKE', "%{$GLOBALS['search']}%")->
               whereOr('description', 'LIKE', "%{$GLOBALS['search']}%")->
-              whereOr('EAN', 'LIKE', "%{$GLOBALS['search']}%");
-            })->whereIn('shop_id', $myShops->pluck('id'))->get();
+              whereOr('EAN', 'LIKE', "%{$GLOBALS['search']}%");})->whereIn('shop_id', $myShops->pluck('id'))->get();
         }
         else
         {
@@ -30,10 +31,11 @@ class PhoneRepository
         }
         return $phones;
     }
-    public function insert(Request $request, $myShops)
+    public function insert(Request $request)
     {
+        $myShops = Auth::user()->myShops();
         $phone = new Phone();
-        $phoneData = $request->except('status');
+        $phoneData = $request->all();
         $phone->fill($phoneData);
         if (!in_array($phone['shop_id'], $myShops->pluck('id')->toArray()))
         {
@@ -56,20 +58,16 @@ class PhoneRepository
             $phone->photos()->save($photo);
         }
     }
-    public function update($id, Request $request, $myShops)
+    public function update($phone, Request $request)
     {
-        $phone = Phone::findOrFail($id);
+        $myShops = Auth::user()->myShops();
         $phoneData = $request->except('status');
         if (!in_array($phone['shop_id'], $myShops->pluck('id')->toArray()))
         {
-            throw \Exception('You do not have access to this shop!');
+            return redirect()->back()->withErrors('You do not have access');
         }
         $phoneData['condition'] = PhoneConditionEnum::getValue($phoneData['condition']);
         $phone->update($phoneData);
-
-//        $order = $phone->order;
-//        $order->status = 'on stock';
-//        $order->save();
 
         $photos = $request->photos;
         $photos_count = count($photos);
@@ -79,16 +77,16 @@ class PhoneRepository
             for ($i = 0; $i < $photos_count; $i++)
             {
                 $photo = new Photo();
-                $path = FileHelper::createFile($photos[$i], "public/phone_photos", time());
+                $path = FileHelper::createFile($photos[$i], "storage/phone_photos", time());
                 $photo->path = $path;
                 $phone->photos()->save($photo);
             }
         }
     }
 
-    public function delete($id, $myShops)
+    public function delete($phone)
     {
-        $phone = Phone::findOrFail($id);
+        $myShops = Auth::user()->myShops();
         if(!in_array($phone->shop_id, $myShops->pluck('id')->toArray()))
         {
             throw new \Exception('You do not have access');

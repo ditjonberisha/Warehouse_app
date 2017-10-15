@@ -10,15 +10,15 @@
                 <form action="/orders" class="navbar-form navbar-left" style="margin-right: -2px" method="get">
                     <div class="input-group">
                         <input type="text" class="form-control" data-date-picker="1" placeholder="From date" name="from" id="from" />
-                        {{--<span class="input-group-addon">--}}
-							{{--<i class="glyphicon glyphicon-calendar"></i>--}}
-						{{--</span>--}}
+                        <span class="input-group-addon">
+							<i class="glyphicon glyphicon-calendar"></i>
+						</span>
                     </div>
                     <div class="input-group">
                         <input type="text" class="form-control" id="to" data-date-picker="1" placeholder="To date" name="to" />
-                        {{--<span class="input-group-addon">--}}
-                            {{--<i class="glyphicon glyphicon-calendar"></i>--}}
-                        {{--</span>--}}
+                        <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-calendar"></i>
+                        </span>
                     </div>
                     <div class="input-group">
                         <input type="text" class="form-control" name="search" value="{{ $search }}" placeholder="Search..." />

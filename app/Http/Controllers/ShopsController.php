@@ -16,20 +16,12 @@ class ShopsController extends Controller
 
     public function index(Request $request)
     {
-        $shops = $request->user()->myShops()->where('active', 1)->get();
+        $shops = $request->user()->myShops();
         return view('shops.index', compact('shops'));
     }
-    public function show($id)
+    public function show(Shop $shop)
     {
-        try
-        {
-            $shop = Shop::findOrFail($id);
-            return view('shops.show', compact('shop'));
-        }
-        catch(Exception $exception)
-        {
-        }
-
+        return view('shops.show', compact('shop'));
     }
     public function create()
     {
@@ -39,49 +31,42 @@ class ShopsController extends Controller
     {
         try
         {
+            $request->validate(Shop::rules);
             $this->repo->insert($request);
             return redirect('shops');
         }
         catch(Exception $exception)
         {
-
+            return redirect()->back()->withInput($request->all())->withErrors($exception->getMessage());
         }
     }
-    public function edit($id)
+    public function edit(Shop $shop)
+    {
+        return view('shops.edit', compact('shop'));
+    }
+    public function update(Shop $shop, Request $request)
     {
         try
         {
-            $shop = Shop::findOrFail($id);
-            return view('shops.edit', compact('shop'));
-        }
-        catch (\Exception $ex)
-        {
-            return redirect('shops')->withErrors($ex->getMessage());
-        }
-
-    }
-    public function update($id, Request $request)
-    {
-        try
-        {
-            $this->repo->update($id, $request);
+            $request->validate(Shop::rules);
+            $this->repo->update($shop, $request);
             return redirect('shops');
         }
         catch (\Exception $ex)
         {
-            return redirect('shops')->withErrors($ex->getMessage());
+            return redirect()->back()->withInput($request->all())->withErrors($ex->getMessage());
         }
     }
-    public function destroy($id)
+    public function destroy(Shop $shop)
     {
         try
         {
-            $this->repo->delete($id);
+            $shop->delete();
             return redirect('shops');
         }
         catch (\Exception $ex)
         {
-            return redirect('shops')->withErrors($ex->getMessage());
+            return redirect()->back()->withErrors($ex->getMessage());
         }
     }
 }

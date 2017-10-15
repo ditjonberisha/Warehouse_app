@@ -42,11 +42,11 @@ class User extends Authenticatable
     {
         if ($this->role == 'admin')
         {
-            return DB::table('shops');
+            return DB::table('shops')->get();
         }
         else
         {
-            return $this->shops();
+            return $this->shops()->get();
         }
     }
 
