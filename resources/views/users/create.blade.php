@@ -11,7 +11,6 @@
                         <div class="col-lg-6">
                             <form role="form" action="/register" method="post">
                                 {{ csrf_field() }}
-
                                 <div class="form-group">
                                     <label>Name</label>
                                     <input value="{{ old('name') }}" name="name" class="form-control">
