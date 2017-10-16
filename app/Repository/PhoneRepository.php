@@ -18,12 +18,11 @@ class PhoneRepository
         {
             $phones = Phone::where(function($query){
               $query->where('IMEI1' ,'LIKE', "%{$GLOBALS['search']}%")->
-              whereOr('IMEI2', 'LIKE', "%{$GLOBALS['search']}%")->
-              whereOr('returnedOrderId', 'LIKE', "%{$GLOBALS['search']}%")->
-              whereOr('condition', 'LIKE', "{$GLOBALS['search']}")->
-              whereOr('customer_email', 'LIKE', "%{$GLOBALS['search']}%")->
-              whereOr('description', 'LIKE', "%{$GLOBALS['search']}%")->
-              whereOr('EAN', 'LIKE', "%{$GLOBALS['search']}%");})
+              orWhere('IMEI2', 'LIKE', "%{$GLOBALS['search']}%")->
+              orWhere('returnedOrderId', 'LIKE', "%{$GLOBALS['search']}%")->
+              orWhere('condition', 'LIKE', "{$GLOBALS['search']}")->
+              orWhere('customer_email', 'LIKE', "%{$GLOBALS['search']}%")->
+              orWhere('EAN', 'LIKE', "%{$GLOBALS['search']}%");})
                 ->whereIn('shop_id', $myShops->pluck('id'));
         }
         else

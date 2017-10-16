@@ -45,6 +45,7 @@
                             <th>Order ID</th>
                             <th>Condition</th>
                             <th>IMEI1</th>
+                            <th>IMEI2</th>
                             <th>Customer</th>
                             <th>EAN</th>
                             <th>Actions</th>
@@ -57,6 +58,7 @@
                                 <td>{{ $phone->returnedOrderId  }}</td>
                                 <td>{{ $phone->condition }}</td>
                                 <td>{{ $phone->IMEI1 }}</td>
+                                <td>{{ $phone->IMEI2 }}</td>
                                 <td>{{ $phone->customer_email }}</td>
                                 <td>{{ $phone->EAN }}</td>
                                 <td>
