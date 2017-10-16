@@ -23,7 +23,8 @@ class PhoneRepository
               whereOr('condition', 'LIKE', "{$GLOBALS['search']}")->
               whereOr('customer_email', 'LIKE', "%{$GLOBALS['search']}%")->
               whereOr('description', 'LIKE', "%{$GLOBALS['search']}%")->
-              whereOr('EAN', 'LIKE', "%{$GLOBALS['search']}%");})->whereIn('shop_id', $myShops->pluck('id'));
+              whereOr('EAN', 'LIKE', "%{$GLOBALS['search']}%");})
+                ->whereIn('shop_id', $myShops->pluck('id'));
         }
         else
         {
@@ -91,16 +92,7 @@ class PhoneRepository
         {
             throw new \Exception('You do not have access');
         }
-        $photo_count = count($phone->photos);
-        for($i = 0; $i < $photo_count; $i++)
-        {
-            $photo = $phone->photos[$i];
-            FileHelper::deleteFile($photo->path);
-            $photo->forceDelete();
-        }
-        if(isset($phone->order))
-            $phone->order->forceDelete();
-        $phone->forceDelete();
+        $phone->delete();
     }
 }
 ?>

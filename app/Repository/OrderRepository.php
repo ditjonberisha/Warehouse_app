@@ -24,12 +24,12 @@ class OrderRepository
                         ->orWhere('orders.soldOrderId', 'LIKE', "%{$GLOBALS['search']}%");
                 }
             )
-                ->whereIn('phones.shop_id', $myShops->pluck('id')->toArray())->select(['orders.*']);
+                ->whereIn('phones.shop_id', $myShops->pluck('id'))->select(['orders.*']);
         }
         else
         {
             $orders = Order::join('phones', 'orders.phone_id', '=', 'phones.id')
-                ->whereIn('shop_id', $myShops->pluck('id')->toArray())->select(['orders.*']);
+                ->whereIn('shop_id', $myShops->pluck('id'))->select(['orders.*']);
         }
         if(!empty($from) && !empty($to))
         {

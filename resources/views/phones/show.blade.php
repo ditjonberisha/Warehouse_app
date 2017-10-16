@@ -65,6 +65,7 @@
     </div>
     <div class="col-xs-3">
         <form method="post" action="/phones/{{ $phone->id }}">
+            {{ csrf_field() }}
             <input type="hidden" name="_method" value="DELETE">
             <button type="submit" class="btn btn-danger">Delete</button>
         </form>

@@ -13,8 +13,8 @@ class TestController extends Controller
     public function test()
     {
         $user = new User();
-        $user->name = 'admin';
-        $user->email = 'admin@gmail.com';
+        $user->name = 'manager';
+        $user->email = 'manager@gmail.com';
         $user->password = bcrypt('12345678');
         $user->role = 'manager';
         $user->save();

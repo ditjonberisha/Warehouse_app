@@ -26,6 +26,7 @@
             </div>
                 <form method="post" action="/orders/{{ $order->id }}">
                     <input type="hidden" name="_method" value="DELETE">
+                    {{ csrf_field() }}
                     <button id="show_details" type="button" class="btn btn-primary">Show Details</button>
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
