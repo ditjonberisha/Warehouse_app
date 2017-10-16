@@ -23,7 +23,14 @@ class OrdersController extends Controller
     }
     public function show(Order $order)
     {
-        $order = $this->repo->getOrder($order);
+        try
+        {
+            $order = $this->repo->getOrder($order);
+        }
+        catch(\Exception $ex)
+        {
+            return redirect('orders')->withErrors($ex->getMessage());
+        }
         return view('orders.show', compact('order'));
     }
     public function edit(Order $order)
@@ -37,9 +44,9 @@ class OrdersController extends Controller
             $this->repo->update($order, $request);
             return redirect('orders');
         }
-        catch(Exception $exception)
+        catch(\Exception $exception)
         {
-            return redirect()->back()->withInput()->withErrors($exception->getMessage());
+            return redirect("/orders/$order->id/edit")->withErrors($exception->getMessage());
         }
     }
     public function destroy(Order $order)
@@ -51,7 +58,7 @@ class OrdersController extends Controller
         }
         catch (\Exception $ex)
         {
-            return redirect()>back()->withErrors($ex->getMessage());
+            return redirect('orders')->withErrors($ex->getMessage());
         }
     }
 }

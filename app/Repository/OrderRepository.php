@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Mockery\Exception;
 
 class OrderRepository
 {
@@ -51,7 +52,7 @@ class OrderRepository
         $myShops = Auth::user()->myShops();
         if(!in_array($order->phone->shop_id, $myShops->pluck('id')->toArray()))
         {
-            return redirect()->back()->withErrors('You do not have access');
+            throw new \Exception('You do not have access');
         }
         return $order;
     }
@@ -61,11 +62,11 @@ class OrderRepository
         $orderData = $request->toArray();
         if(!in_array($order->phone->shop_id, $myShops->pluck('id')->toArray()))
         {
-            return redirect()->back()->withInput()->withErrors('You do not have access');
+            return redirect()->back()->withErrors('You do not have access');
         }
         if($orderData['status'] == OrderStatusEnum::Sold && empty($orderData['soldOrderId']))
         {
-            return redirect()->back()->withInput()->withErrors('Please fill the sale order id');
+            throw new \Exception('Please fill the sale order id');
         }
         $orderData['status'] = strtolower(OrderStatusEnum::getValue($orderData['status']));
         $order->update($orderData);
