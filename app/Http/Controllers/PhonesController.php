@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Repository\PhoneRepository;
 use Mockery\Exception;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Enum\PhoneConditionEnum;
 
 class PhonesController extends Controller
 {
@@ -45,7 +44,7 @@ class PhonesController extends Controller
         }
         catch(Exception $exception)
         {
-            return redirect()->back()->withInput($request->toArray())->withErrors($exception->getMessage());
+            return redirect()->back()->withErrors($exception->getMessage());
         }
     }
     public function edit(Phone $phone)
@@ -65,7 +64,7 @@ class PhonesController extends Controller
         }
         catch(Exception $exception)
         {
-            return redirect()->back()->withInput($request->toArray())->withErrors($exception->getMessage());
+            return redirect()->back()->withErrors($exception->getMessage());
         }
     }
     public function destroy(Phone $phone)

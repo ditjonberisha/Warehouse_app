@@ -16,7 +16,7 @@ class TestController extends Controller
         $user->name = 'admin';
         $user->email = 'admin@gmail.com';
         $user->password = bcrypt('12345678');
-        $user->role = 'admin';
+        $user->role = 'manager';
         $user->save();
 
         return $user;

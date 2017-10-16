@@ -13,27 +13,27 @@
                                 {{ csrf_field() }}
                                 <div class="form-group">
                                     <label>Customer name</label>
-                                    <input name="customer_name" class="form-control">
+                                    <input value= "{{ old('customer_name') }}" name="customer_name" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label>Customer email</label>
-                                    <input name="customer_email" class="form-control">
+                                    <input value= "{{ old('customer_email') }}" name="customer_email" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label>IMEI1</label>
-                                    <input name="IMEI1" class="form-control">
+                                    <input value= "{{ old('IMEI1') }}" name="IMEI1" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label>IMEI2</label>
-                                    <input name="IMEI2" class="form-control">
+                                    <input value= "{{ old('IMEI2') }}" name="IMEI2" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label>EAN</label>
-                                    <input name="EAN" class="form-control">
+                                    <input value= "{{ old('EAN') }}" name="EAN" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label>Order ID</label>
-                                    <input name="returnedOrderId" class="form-control">
+                                    <input value= "{{ old('returnedOrderId') }}" name="returnedOrderId" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label>Shop</label>
@@ -54,7 +54,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Description</label>
-                                    <textarea name="description" class="form-control" rows="3"></textarea>
+                                    <textarea name="description" class="form-control" rows="3">{{ old('description') }}</textarea>
                                 </div>
                                 <div class="form-group">
                                     <label>File input</label>

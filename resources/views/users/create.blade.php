@@ -14,11 +14,11 @@
 
                                 <div class="form-group">
                                     <label>Name</label>
-                                    <input name="name" class="form-control">
+                                    <input value="{{ old('name') }}" name="name" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label>Email</label>
-                                    <input name="email" type="email" class="form-control">
+                                    <input value="{{ old('email') }}" name="email" type="email" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label>Password</label>
@@ -30,13 +30,13 @@
                                 </div>
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="role" id="optionsRadios1" value="admin" checked>
+                                        <input type="radio" name="role" value="admin" checked>
                                         Admin
                                     </label>
                                 </div>
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="role" id="optionsRadios2" value="manager">Manager
+                                        <input type="radio" name="role" value="manager">Manager
                                     </label>
                                 </div>
                                 <button type="submit" class="btn btn-default">Create</button>

@@ -20,6 +20,7 @@
                             <th>Name</th>
                             <th>Email</th>
                             <th>Role</th>
+                            <th>Manages</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
@@ -30,6 +31,7 @@
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->role }}</td>
+                                <td>{{ $user->shops->count() }} shops </td>
                                 <td>
                                     <a href="/users/{{ $user->id }}" class="fa fa-eye"></a>
                                     <a href="/users/{{ $user->id }}/edit" class="fa fa-edit"></a>
