@@ -15,7 +15,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html">Warehouse</a>
+            <a class="navbar-brand" href="/">Warehouse</a>
         </div>
         <!-- /.navbar-header -->
 
@@ -27,6 +27,9 @@
 
     <!-- Page Content -->
     <div id="page-wrapper">
+
+        @include('partials._errors')
+
         @yield('content')
         <!-- /.container-fluid -->
     </div>

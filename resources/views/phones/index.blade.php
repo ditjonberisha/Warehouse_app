@@ -1,11 +1,21 @@
 @extends('layouts.app_1')
 
 @section('content')
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Phones
+            </h1>
+        </div>
+
+    </div>
+
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Phones
+                    All Phones
                 </div>
                 <form action="/phones" class="navbar-form navbar-left" style="margin-right: -2px" method="get">
                     <div class="input-group">
