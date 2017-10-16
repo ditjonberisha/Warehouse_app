@@ -21,7 +21,7 @@
                         </div>
                     </div>
                 </div>
-                <a href="/orders">
+                <a href="/orders?search=on stock">
                     <div class="panel-footer">
                         <span class="pull-left">View Details</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -43,7 +43,7 @@
                         </div>
                     </div>
                 </div>
-                <a href="/orders">
+                <a href="/orders?search=being repaired">
                     <div class="panel-footer">
                         <span class="pull-left">View Details</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -65,7 +65,7 @@
                         </div>
                     </div>
                 </div>
-                <a href="/orders">
+                <a href="/orders?search=to be sold">
                     <div class="panel-footer">
                         <span class="pull-left">View Details</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -87,7 +87,7 @@
                         </div>
                     </div>
                 </div>
-                <a href="/orders">
+                <a href="/orders?search=sold">
                     <div class="panel-footer">
                         <span class="pull-left">View Details</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

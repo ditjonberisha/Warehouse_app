@@ -11,9 +11,12 @@ class ShopRepository
         $shopData = $request->toArray();
         $shop->fill($shopData);
         $shop->save();
-        foreach($request->user_ids as $user_id)
+        if(count($request->user_id) > 0)
         {
-            $shop->users()->attach($user_id);
+            foreach($request->user_ids as $user_id)
+            {
+                $shop->users()->attach($user_id);
+            }
         }
     }
 
@@ -22,9 +25,12 @@ class ShopRepository
         $shopData = $request->toArray();
         $shop->update($shopData);
         $shop->users()->detach();
-        foreach($request->user_ids as $user_id)
+        if(count($request->user_id) > 0)
         {
-            $shop->users()->attach($user_id);
+            foreach($request->user_ids as $user_id)
+            {
+                $shop->users()->attach($user_id);
+            }
         }
     }
 }

@@ -4,41 +4,47 @@ namespace App\Repository;
 use App\Models\Enum\OrderStatusEnum;
 use Illuminate\Http\Request;
 use App\Models\Order;
-use App\Models\Phone;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class OrderRepository
 {
-    public function getOrders(Request $request)
+    public function getOrders($from = '', $to = '', $search = '')
     {
         $myShops = Auth::user()->myShops();
-        $GLOBALS['search'] = $request->search;
+        $GLOBALS['search'] = strtolower($search);
         if(!empty($GLOBALS['search']))
         {
-            $orders = Order::join('phones', 'phones.id', '=', 'orders.phone_id')->where(
+            $orders = Order::join('phones', 'orders.phone_id', '=', 'phones.id')->where(
                 function($query) {
                     $query->where('phones.returnedOrderId', 'LIKE', "%{$GLOBALS['search']}%")
                         ->orWhere('phones.customer_email', 'LIKE', "%{$GLOBALS['search']}%")
-                        ->orWhere('orders.status', 'LIKE', "%{$GLOBALS['search']}%")
+                        ->orWhere('orders.status', 'LIKE', "{$GLOBALS['search']}")
                         ->orWhere('orders.soldOrderId', 'LIKE', "%{$GLOBALS['search']}%");
                 }
             )
-                ->whereIn('phones.shop_id', $myShops->pluck('id')->toArray())->get();
+                ->whereIn('phones.shop_id', $myShops->pluck('id')->toArray())->select(['orders.*']);
         }
         else
         {
-            $products_all = Phone::whereIn('shop_id', $myShops->pluck('id')->toArray())->get();
-            $orders = Order::whereIn('phone_id', $products_all->pluck('id')->toArray())->get();
+            $orders = Order::join('phones', 'orders.phone_id', '=', 'phones.id')
+                ->whereIn('shop_id', $myShops->pluck('id')->toArray())->select(['orders.*']);
         }
-        if(!empty($request->from) && !empty($request->from) )
+        if(!empty($from) && !empty($to))
         {
-            $orders = $orders->where('orders.created_at', '=>', $request->from);
+            $orders = $orders->whereBetween('orders.created_at',
+                [Carbon::createFromFormat('!d/m/Y', $from),
+                    Carbon::createFromFormat('d/m/Y', $to)]);
         }
-        if(!empty($request->to))
+        elseif(!empty($from))
         {
-            $orders = $orders->where('orders.created_at', '<=', $request->to);
+            $orders = $orders->where('orders.created_at', '>=', Carbon::createFromFormat('!d/m/Y', $from));
         }
-        return $orders;
+        elseif(!empty($to))
+        {
+            $orders = $orders->where('orders.created_at', '<=', Carbon::createFromFormat('d/m/Y', $to));
+        }
+        return $orders->get();
     }
     public function getOrder($order)
     {

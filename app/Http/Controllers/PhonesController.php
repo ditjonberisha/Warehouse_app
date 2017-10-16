@@ -18,8 +18,8 @@ class PhonesController extends Controller
 
     public function index(Request $request)
     {
-        $phones = $this->repo->getPhones($request);
         $search = $request->search;
+        $phones = $this->repo->getPhones($request);
         return view('phones.index', compact('phones', 'search'));
     }
     public function show(Phone $phone)

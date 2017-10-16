@@ -15,10 +15,10 @@ class OrdersController extends Controller
     }
     public function index(Request $request)
     {
-        $orders = $this->repo->getOrders($request);
         $search = $request->search;
         $from = $request->from;
         $to = $request->to;
+        $orders = $this->repo->getOrders($from, $to, $search);
         return view('orders.index', compact('orders', 'from', 'to', 'search'));
     }
     public function show(Order $order)

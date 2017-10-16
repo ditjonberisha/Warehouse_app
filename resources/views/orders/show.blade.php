@@ -41,7 +41,7 @@
                     <a href="/phones/{{ $order->phone->id }}">Phone details</a>
                     @foreach($order->phone->photos as $photo)
                         <div class="alert">
-                            <img width="100%" height="100%"src="{{ URL::asset('/storage/'.$photo->path) }}">
+                            <img width="100%" height="100%"src="{{ Storage::url($photo->path) }}">
                         </div>
                     @endforeach
                 </div>
