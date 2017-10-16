@@ -3,9 +3,17 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12">
+            <h1 class="page-header">
+                Shops
+            </h1>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    DataTables Advanced Tables
+                    All shops of warehouse
                 </div>
                 <div class="navbar-form navbar-right">
                     <a href="/shops/create" class="btn btn-primary" style="margin-right: 15px; ">Add</a>
