@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class PhoneRepository
 {
-    public function getPhones($search)
+    public function getPhones($search = '')
     {
         $myShops = Auth::user()->myShops();
         $GLOBALS['search'] = strtolower($search);
