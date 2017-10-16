@@ -43,7 +43,6 @@
                                 <td>{{ $user->shops->count() }} shops </td>
                                 <td>
                                     <a href="/users/{{ $user->id }}" class="fa fa-eye"></a>
-                                    <a href="/users/{{ $user->id }}/edit" class="fa fa-edit"></a>
                                 </td>
                             </tr>
                         @endforeach
