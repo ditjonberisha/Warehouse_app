@@ -1,10 +1,17 @@
-@extends('layouts.app_1')
+@extends('layouts.master')
 @section('content')
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Create Order
+            </h1>
+        </div>
+    </div>
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Basic Form Elements
+                    Order Information
                 </div>
                 <div class="panel-body">
                     <div class="row">

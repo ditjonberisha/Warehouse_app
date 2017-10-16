@@ -1,4 +1,4 @@
-@extends('layouts.app_1')
+@extends('layouts.master')
 @section('content')
     <div class="row">
         <div class="col-lg-12">
@@ -12,37 +12,49 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Basic Form Elements
+                    Phone Information
                 </div>
                 <div class="panel-body">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <form role="form" action="/phones" method="post" enctype="multipart/form-data">
-                                {{ csrf_field() }}
+                    <div class="col-lg-12">
+                        <form role="form" action="/phones" method="post" enctype="multipart/form-data">
+                            {{ csrf_field() }}
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>Customer name</label>
                                     <input value= "{{ old('customer_name') }}" name="customer_name" class="form-control">
                                 </div>
+                            </div>
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>Customer email</label>
                                     <input value= "{{ old('customer_email') }}" name="customer_email" class="form-control">
                                 </div>
+                            </div>
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>IMEI1</label>
                                     <input value= "{{ old('IMEI1') }}" name="IMEI1" class="form-control">
                                 </div>
+                            </div>
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>IMEI2</label>
                                     <input value= "{{ old('IMEI2') }}" name="IMEI2" class="form-control">
                                 </div>
+                            </div>
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>EAN</label>
                                     <input value= "{{ old('EAN') }}" name="EAN" class="form-control">
                                 </div>
+                            </div>
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>Order ID</label>
                                     <input value= "{{ old('returnedOrderId') }}" name="returnedOrderId" class="form-control">
                                 </div>
+                            </div>
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>Shop</label>
                                     <select name="shop_id" class="form-control">
@@ -51,6 +63,8 @@
                                         @endforeach
                                     </select>
                                 </div>
+                            </div>
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>Condition</label>
                                     <select name="condition" class="form-control">
@@ -60,21 +74,30 @@
                                         <option value="3">Broken Unfixable</option>
                                     </select>
                                 </div>
+                            </div>
+                            <div class="col-lg-12">
                                 <div class="form-group">
                                     <label>Description</label>
                                     <textarea name="description" class="form-control" rows="3">{{ old('description') }}</textarea>
                                 </div>
+                            </div>
+
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>File input</label>
                                     <input type="file" multiple="multiple" name="photos[]">
                                 </div>
+                            </div>
 
-                                <button type="submit" class="btn btn-default">Create</button>
-                            </form>
-                        </div>
-                        <!-- /.col-lg-6 (nested) -->
+                            <div class="col-lg-offset-6 col-lg-6">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary pull-right">Create</button>
+                                </div>
+                            </div>
+
+                        </form>
                     </div>
-                    <!-- /.row (nested) -->
+                    <!-- /.col-lg-6 (nested) -->
                 </div>
                 <!-- /.panel-body -->
             </div>

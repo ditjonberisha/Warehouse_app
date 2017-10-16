@@ -1,4 +1,4 @@
-@extends('layouts.app_1')
+@extends('layouts.master')
 
 @section('content')
 
@@ -8,7 +8,6 @@
                 Phones
             </h1>
         </div>
-
     </div>
 
     <div class="row">
@@ -33,7 +32,7 @@
                     </div>
                 </form>
                 <div class="navbar-form navbar-right">
-                    <a href="/phones/create" class="btn btn-primary" style="margin-right: 15px; ">Add</a>
+                    <a href="/phones/create" class="btn btn-success" style="margin-right: 15px;">Add</a>
                 </div>
                 <!-- /.panel-heading -->
 
@@ -60,8 +59,8 @@
                                 <td>{{ $phone->customer_email }}</td>
                                 <td>{{ $phone->EAN }}</td>
                                 <td>
-                                    <a href="/phones/{{ $phone->id }}" class="fa fa-eye"></a>
-                                    <a href="/phones/{{ $phone->id }}/edit" class="fa fa-edit"></a>
+                                    &nbsp;<a href="/phones/{{ $phone->id }}" ><i class="fa fa-search" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                                    <a href="/phones/{{ $phone->id }}/edit" ><i class="fa fa-edit" aria-hidden="true"></i></a>
                                 </td>
                             </tr>
                         @endforeach

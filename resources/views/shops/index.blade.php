@@ -1,22 +1,23 @@
-@extends('layouts.app_1')
+@extends('layouts.master')
 
 @section('content')
+
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">
                 Shops
             </h1>
         </div>
-
     </div>
+
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    All shops of warehouse
+                    All shops
                 </div>
                 <div class="navbar-form navbar-right">
-                    <a href="/shops/create" class="btn btn-primary" style="margin-right: 15px; ">Add</a>
+                    <a href="/shops/create" class="btn btn-success" style="margin-right: 15px;">Add</a>
                 </div>
                 <!-- /.panel-heading -->
 
@@ -39,8 +40,8 @@
                                 <td>{{ $shop->country}}</td>
                                 <td>{{ $shop->city }}</td>
                                 <td>
-                                    <a href="/shops/{{ $shop->id }}" class="fa fa-eye"></a>
-                                    <a href="/shops/{{ $shop->id }}/edit" class="fa fa-edit"></a>
+                                    &nbsp;<a href="/shops/{{ $shop->id }}" ><i class="fa fa-search" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                                    <a href="/shops/{{ $shop->id }}/edit" ><i class="fa fa-edit" aria-hidden="true"></i></a>
                                 </td>
                             </tr>
                         @endforeach
@@ -53,4 +54,5 @@
         <!-- /.col-lg-12 -->
         </div>
     </div>
+
 @stop

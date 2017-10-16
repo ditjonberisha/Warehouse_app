@@ -2,13 +2,23 @@
 use App\Models\Enum\PhoneConditionEnum;
 ?>
 
-@extends('layouts.app_1')
+@extends('layouts.master')
+
 @section('content')
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Edit Shop
+            </h1>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Basic Form Elements
+                    Shop Information
                 </div>
                 <div class="panel-body">
                     <div class="row">
@@ -37,7 +47,9 @@ use App\Models\Enum\PhoneConditionEnum;
                                         @endforeach
                                     </select>
                                 </div>
-                                <button type="submit" class="btn btn-default">Update</button>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary pull-right">Update</button>
+                                </div>
                             </form>
                         </div>
 
@@ -50,4 +62,5 @@ use App\Models\Enum\PhoneConditionEnum;
         </div>
         <!-- /.col-lg-12 -->
     </div>
+
 @endsection

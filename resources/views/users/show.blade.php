@@ -1,33 +1,43 @@
-@extends('layouts.app_1')
+@extends('layouts.master')
 
 @section('content')
+
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                User Details
+
+                @if(Auth::user()->role == 'admin')
+                    <div class="pull-right">
+                        <form method="post" action="/users/{{ $user->id }}">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                        </form>
+                    </div>
+                @endif
+            </h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     Details
                 </div>
                 <div class="panel-body">
-                    <div class="alert alert-info">
-                        Name: {{ $user->name }}.
+                    <div>
+                        <b>Name:</b> {{ $user->name }}
                     </div>
-                    <div class="alert alert-info">
-                        Email: {{ $user->email }}.
+                    <div>
+                        <b>Email:</b> {{ $user->email }}
                     </div>
-                    <div class="alert alert-info">
-                        Role: {{ $user->role }}.
+                    <div>
+                        <b>Role:</b> {{ $user->role }}
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    @if(Auth::user()->role == 'admin')
-        <div class="col-xs-3">
-            <form method="post" action="/users/{{ $user->id }}">
-                <input type="hidden" name="_method" value="DELETE">
-                <button type="submit" class="btn btn-danger">Delete</button>
-            </form>
-        </div>
-    @endif
 
 @endsection

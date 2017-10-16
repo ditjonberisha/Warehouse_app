@@ -1,13 +1,13 @@
-@extends('layouts.app_1')
+@extends('layouts.master')
 
 @section('content')
+
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">
                 Users
             </h1>
         </div>
-
     </div>
 
     <div class="row">
@@ -17,7 +17,7 @@
                     All Users
                 </div>
                 <div class="navbar-form navbar-right">
-                    <a href="/users/create" class="btn btn-primary" style="margin-right: 15px; ">Add</a>
+                    <a href="/users/create" class="btn btn-success" style="margin-right: 15px; ">Add</a>
                 </div>
                 <!-- /.panel-heading -->
 
@@ -42,8 +42,7 @@
                                 <td>{{ $user->role }}</td>
                                 <td>{{ $user->shops->count() }} shops </td>
                                 <td>
-                                    <a href="/users/{{ $user->id }}" class="fa fa-eye"></a>
-                                    <a href="/users/{{ $user->id }}/edit" class="fa fa-edit"></a>
+                                    <a href="/users/{{ $user->id }}"><i class="fa fa-search" aria-hidden="true"></i></a>
                                 </td>
                             </tr>
                         @endforeach
@@ -56,4 +55,5 @@
         <!-- /.col-lg-12 -->
         </div>
     </div>
+
 @stop

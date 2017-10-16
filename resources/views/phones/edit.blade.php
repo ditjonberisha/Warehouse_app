@@ -2,8 +2,10 @@
 use App\Models\Enum\PhoneConditionEnum;
 ?>
 
-@extends('layouts.app_1')
+@extends('layouts.master')
+
 @section('content')
+
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">
@@ -16,39 +18,51 @@ use App\Models\Enum\PhoneConditionEnum;
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Basic Form Elements
+                    Phone Information
                 </div>
                 <div class="panel-body">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <form role="form" action="/phones/{{ $phone->id }}" method="post">
-                                <input type="hidden" name="_method" value="PUT">
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <div class="col-lg-12">
+                        <form role="form" action="/phones/{{ $phone->id }}" method="post">
+                            <input type="hidden" name="_method" value="PUT">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>Customer name</label>
                                     <input name="customer_name" value="{{ $phone->customer_name }}" class="form-control">
                                 </div>
+                            </div>
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>Customer email</label>
                                     <input name="customer_email" value="{{ $phone->customer_email }}" class="form-control">
                                 </div>
+                            </div>
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>IMEI1</label>
                                     <input name="IMEI1" value="{{ $phone->IMEI1 }}" class="form-control">
                                 </div>
+                            </div>
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>IMEI2</label>
                                     <input name="IMEI2" value="{{ $phone->IMEI2 }}" class="form-control">
                                 </div>
+                            </div>
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>EAN</label>
                                     <input name="EAN" value="{{ $phone->EAN }}" class="form-control">
                                 </div>
+                            </div>
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>Order ID</label>
                                     <input name="returnedOrderId" value="{{ $phone->returnedOrderId }}" class="form-control">
                                 </div>
+                            </div>
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>Shop</label>
                                     <select name="shop_id" class="form-control">
@@ -57,6 +71,8 @@ use App\Models\Enum\PhoneConditionEnum;
                                         @endforeach
                                     </select>
                                 </div>
+                            </div>
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>Condition</label>
                                     <select name="condition" class="form-control">
@@ -66,21 +82,29 @@ use App\Models\Enum\PhoneConditionEnum;
                                         <option {{  PhoneConditionEnum::getNumber((string)$phone->condition) == 3 ? 'selected' : '' }} value="3">Broken Unfixable</option>
                                     </select>
                                 </div>
+                            </div>
+                            <div class="col-lg-12">
                                 <div class="form-group">
                                     <label>Description</label>
                                     <textarea name="description" class="form-control" rows="3">{{ $phone->description }}</textarea>
                                 </div>
+                            </div>
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>File input</label>
                                     <input type="file">
                                 </div>
+                            </div>
+                            <div class="col-lg-offset-6 col-lg-6">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary pull-right">Update</button>
+                                </div>
+                            </div>
 
-                                <button type="submit" class="btn btn-default">Update</button>
-                            </form>
-                        </div>
-
+                        </form>
                     </div>
-                    <!-- /.row (nested) -->
+
+
                 </div>
                 <!-- /.panel-body -->
             </div>
@@ -88,4 +112,5 @@ use App\Models\Enum\PhoneConditionEnum;
         </div>
         <!-- /.col-lg-12 -->
     </div>
+
 @endsection

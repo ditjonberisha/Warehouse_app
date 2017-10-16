@@ -1,10 +1,20 @@
-@extends('layouts.app_1')
+@extends('layouts.master')
+
 @section('content')
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                New Shop
+            </h1>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Basic Form Elements
+                    Shop Information
                 </div>
                 <div class="panel-body">
                     <div class="row">
@@ -30,7 +40,9 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <button type="submit" class="btn btn-default">Create</button>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary pull-right">Create</button>
+                                </div>
                             </form>
                         </div>
                     </div>

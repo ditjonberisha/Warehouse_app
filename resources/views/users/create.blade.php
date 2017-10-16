@@ -1,10 +1,20 @@
-@extends('layouts.app_1')
+@extends('layouts.master')
+
 @section('content')
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                New User
+            </h1>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Basic Form Elements
+                    User Information
                 </div>
                 <div class="panel-body">
                     <div class="row">
@@ -28,18 +38,20 @@
                                     <label>Password Confirm</label>
                                     <input name="password_confirmation" type="password" class="form-control">
                                 </div>
-                                <div class="radio">
+                                <div class="form-group">
                                     <label>
                                         <input type="radio" name="role" value="admin" checked>
                                         Admin
                                     </label>
-                                </div>
-                                <div class="radio">
+                                    &nbsp;&nbsp;&nbsp;
                                     <label>
                                         <input type="radio" name="role" value="manager">Manager
                                     </label>
                                 </div>
-                                <button type="submit" class="btn btn-default">Create</button>
+
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary pull-right">Create</button>
+                                </div>
                             </form>
                         </div>
                         <!-- /.col-lg-6 (nested) -->
@@ -52,4 +64,5 @@
         </div>
         <!-- /.col-lg-12 -->
     </div>
+
 @endsection

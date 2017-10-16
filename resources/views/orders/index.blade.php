@@ -1,4 +1,4 @@
-@extends('layouts.app_1')
+@extends('layouts.master')
 
 @section('content')
     <div class="row">
@@ -7,7 +7,6 @@
                 Orders
             </h1>
         </div>
-
     </div>
 
     <div class="row">
@@ -65,8 +64,8 @@
                                 <td>{{ $order->soldOrderId }}</td>
                                 <td>{{ $order->phone->customer_email }}</td>
                                 <td>
-                                    <a href="/orders/{{ $order->id }}" class="fa fa-eye"></a>
-                                    <a href="/orders/{{ $order->id }}/edit" class="fa fa-edit"></a>
+                                    &nbsp;<a href="/orders/{{ $order->id }}" ><i class="fa fa-search" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                                    <a href="/orders/{{ $order->id }}/edit" ><i class="fa fa-edit" aria-hidden="true"></i></a>
                                 </td>
                             </tr>
                         @endforeach
