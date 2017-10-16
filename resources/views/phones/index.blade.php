@@ -16,7 +16,7 @@
                 <div class="panel-heading">
                     All Phones
                 </div>
-                <form action="/phones" class="navbar-form navbar-left" style="margin-right: -2px" method="get">
+                <form action="/phones"  class="navbar-form navbar-left" style="margin-right: -2px" method="get">
                     <div class="input-group">
                         <input type="text" class="form-control" name="search" value="{{ $search }}" placeholder="Search..." />
                         <span class="input-group-btn">

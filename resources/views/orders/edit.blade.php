@@ -33,7 +33,7 @@ use App\Models\Enum\OrderStatusEnum;
                                     @else
                                         <select id="order_status" name="status" class="form-control">
                                             <option {{ $order->status == 'on stock' ? 'selected' : '' }} value="0">On stock</option>
-                                            <option {{ $order->status == 'beign repaired' ? 'selected' : '' }} value="1">Being repaired</option>
+                                            <option {{ $order->status == 'being repaired' ? 'selected' : '' }} value="1">Being repaired</option>
                                             <option {{ $order->status == 'to be sold'  ? 'selected' : '' }} value="2">To be sold</option>
                                             <option {{ $order->status == 'sold' ? 'selected' : '' }} value="3">Sold</option>
                                         </select>

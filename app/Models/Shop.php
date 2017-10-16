@@ -24,4 +24,10 @@ class Shop extends Model
     {
         return $this->belongsToMany('App\Models\User');
     }
+    public function delete()
+    {
+        $this->phones()->delete();
+        return parent::delete();
+    }
+
 }

@@ -17,13 +17,13 @@
                 </div>
                 <form action="/orders" class="navbar-form navbar-left" style="margin-right: -2px" method="get">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="From date" name="from" id="from" />
+                        <input type="text" value="{{ $from }}" class="form-control" placeholder="From date" name="from" id="from" />
                         <span class="input-group-addon">
 							<i class="glyphicon glyphicon-calendar"></i>
 						</span>
                     </div>
                     <div class="input-group">
-                        <input type="text" class="form-control" id="to" placeholder="To date" name="to" />
+                        <input type="text" value="{{ $to }}" class="form-control" id="to" placeholder="To date" name="to" />
                         <span class="input-group-addon">
                             <i class="glyphicon glyphicon-calendar"></i>
                         </span>
@@ -52,6 +52,7 @@
                             <th>Status</th>
                             <th>Sold Order ID</th>
                             <th>Customer email</th>
+                            <th>Created</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
@@ -63,6 +64,7 @@
                                 <td>{{ $order->status }}</td>
                                 <td>{{ $order->soldOrderId }}</td>
                                 <td>{{ $order->phone->customer_email }}</td>
+                                <td>{{ date('d/m/Y', strtotime($order->created_at)) }}</td>
                                 <td>
                                     &nbsp;<a href="/orders/{{ $order->id }}" ><i class="fa fa-search" aria-hidden="true"></i></a>&nbsp;&nbsp;
                                     <a href="/orders/{{ $order->id }}/edit" ><i class="fa fa-edit" aria-hidden="true"></i></a>

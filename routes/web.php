@@ -19,7 +19,7 @@ Auth::routes();
 Route::resource('/phones', 'PhonesController');
 Route::resource('/orders', 'OrdersController', ['except' => ['create', 'store']]);
 Route::resource('/shops', 'ShopsController');
-Route::resource('users', 'UsersController');
+Route::resource('users', 'UsersController',['except' => ['edit']]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/test', 'TestController@test');

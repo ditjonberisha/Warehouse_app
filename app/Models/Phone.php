@@ -34,4 +34,10 @@ class Phone extends Model
     {
         return $this->hasOne('App\Models\Order');
     }
+    public function delete()
+    {
+        $this->order()->delete();
+        $this->photos()->delete();
+        return parent::delete();
+    }
 }
