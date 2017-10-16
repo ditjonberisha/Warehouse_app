@@ -8,6 +8,7 @@
                 Shop Details
                 <div class="pull-right">
                     <form method="post" action="/shops/{{ $shop->id }}">
+                        {{ csrf_field() }}
                         <input type="hidden" name="_method" value="DELETE">
                         <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                     </form>

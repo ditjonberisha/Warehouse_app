@@ -8,6 +8,7 @@
 
                 <div class="pull-right">
                     <form method="post" action="/orders/{{ $order->id }}">
+                        {{ csrf_field() }}
                         <input type="hidden" name="_method" value="DELETE">
                         <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                     </form>
@@ -97,7 +98,7 @@
                 <div class="panel-body">
                     @foreach($order->phone->photos as $photo)
                         <div class="alert">
-                            <img width="100%" height="100%"src="{{ URL::asset('/storage/'.$photo->path) }}">
+                            <img width="100%" height="100%"src="{{ Storage::url($photo->path) }}">
                         </div>
                     @endforeach
                 </div>
