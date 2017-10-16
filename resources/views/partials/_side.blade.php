@@ -10,12 +10,12 @@
             <li>
                 <a href="/orders"><i class="fa fa-edit fa-fw"></i> Orders</a>
             </li>
+            <li>
+                <a href="/shops"><i class="fa fa-edit fa-fw"></i> Shops</a>
+            </li>
             @if(Auth::user()->role == 'admin')
                 <li>
                     <a href="/users"><i class="fa fa-bar-chart-o fa-fw"></i> Users</a>
-                </li>
-                <li>
-                    <a href="/shops"><i class="fa fa-edit fa-fw"></i> Shops</a>
                 </li>
             @endif
         </ul>

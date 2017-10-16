@@ -29,6 +29,14 @@ use App\Models\Enum\PhoneConditionEnum;
                                     <label>City</label>
                                     <input name="city" value="{{ $shop->city }}" class="form-control">
                                 </div>
+                                <div class="form-group">
+                                    <label>Shop managers</label>
+                                    <select multiple="" name="user_ids[]" class="form-control">
+                                        @foreach($users as $user)
+                                            <option {{ $shop->users->contains($user) ? 'selected' : '' }} value="{{ $user->id }}">{{ $user->email }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                                 <button type="submit" class="btn btn-default">Update</button>
                             </form>
                         </div>

@@ -13,7 +13,8 @@
                     </div>
                     <div class="alert alert-info">
                         Email: {{ $user->email }}.
-                    </div><div class="alert alert-info">
+                    </div>
+                    <div class="alert alert-info">
                         Role: {{ $user->role }}.
                     </div>
                 </div>

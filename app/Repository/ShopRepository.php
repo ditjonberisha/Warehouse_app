@@ -11,19 +11,21 @@ class ShopRepository
         $shopData = $request->toArray();
         $shop->fill($shopData);
         $shop->save();
-        $shop->users()->attach($request->user()->id);
+        foreach($request->user_ids as $user_id)
+        {
+            $shop->users()->attach($user_id);
+        }
     }
 
-    public function update($id, Request $request)
+    public function update($shop, Request $request)
     {
-        $shop = Shop::findOrFail($id);
         $shopData = $request->toArray();
         $shop->update($shopData);
-    }
-
-    public function delete($id)
-    {
-        Shop::destroy($id);
+        $shop->users()->detach();
+        foreach($request->user_ids as $user_id)
+        {
+            $shop->users()->attach($user_id);
+        }
     }
 }
 ?>

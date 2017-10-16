@@ -5,11 +5,13 @@ use App\Models\Enum\OrderStatusEnum;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Phone;
+use Illuminate\Support\Facades\Auth;
 
 class OrderRepository
 {
-    public function getOrders(Request $request, $myShops)
+    public function getOrders(Request $request)
     {
+        $myShops = Auth::user()->myShops();
         $GLOBALS['search'] = $request->search;
         if(!empty($GLOBALS['search']))
         {
@@ -27,8 +29,6 @@ class OrderRepository
         {
             $products_all = Phone::whereIn('shop_id', $myShops->pluck('id')->toArray())->get();
             $orders = Order::whereIn('phone_id', $products_all->pluck('id')->toArray())->get();
-//            $orders = Order::join('phones', 'phones.id', '=', 'orders.phone_id')
-//                ->whereIn('phones.shop_id', $myShops->pluck('id')->toArray())->get();
         }
         if(!empty($request->from) && !empty($request->from) )
         {
@@ -40,34 +40,32 @@ class OrderRepository
         }
         return $orders;
     }
-    public function getOrder($id, $myShops)
+    public function getOrder($order)
     {
-        $order = Order::findOrFail($id);
+        $myShops = Auth::user()->myShops();
         if(!in_array($order->phone->shop_id, $myShops->pluck('id')->toArray()))
         {
-            throw new \Exception('You do not have access');
+            return redirect()->back()->withErrors('You do not have access');
         }
         return $order;
     }
-    public function update($id, Request $request)
+    public function update($order, Request $request)
     {
-        $order = Order::findOrFail($id);
-        $myShops = $request->user()->myShops()->where('active', 1)->get();
+        $myShops = $request->user()->myShops();
         $orderData = $request->toArray();
         if(!in_array($order->phone->shop_id, $myShops->pluck('id')->toArray()))
         {
-            throw new \Exception('You do not have access');
+            return redirect()->back()->withInput()->withErrors('You do not have access');
         }
         if($orderData['status'] == OrderStatusEnum::Sold && empty($orderData['soldOrderId']))
         {
-            throw new \Exception('Please fill the sold order Id');
+            return redirect()->back()->withInput()->withErrors('Please fill the sale order id');
         }
         $orderData['status'] = strtolower(OrderStatusEnum::getValue($orderData['status']));
         $order->update($orderData);
     }
-    public function delete($id)
+    public function delete($order)
     {
-        $order = Order::findOrFail($id);
         $order->phone()->dissociate();
         $order->forceDelete();
     }

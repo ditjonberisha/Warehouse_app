@@ -5,83 +5,73 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Repository\ShopRepository;
 use App\Models\Shop;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class ShopsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth', 'admin']);
+        $this->middleware(['auth']);
+        $this->middleware(['admin'])->except('index');
         $this->repo = new ShopRepository();
     }
 
     public function index(Request $request)
     {
-        $shops = $request->user()->myShops()->where('active', 1)->get();
+        $shops = Auth::user()->myShops();
         return view('shops.index', compact('shops'));
     }
-    public function show($id)
+    public function show(Shop $shop)
     {
-        try
-        {
-            $shop = Shop::findOrFail($id);
-            return view('shops.show', compact('shop'));
-        }
-        catch(Exception $exception)
-        {
-        }
-
+        return view('shops.show', compact('shop'));
     }
     public function create()
     {
-        return view('shops.create');
+        $users = User::where('role', 'manager')->get();
+        return view('shops.create', compact('users'));
     }
     public function store(Request $request)
     {
         try
         {
+            $request->validate(Shop::rules);
             $this->repo->insert($request);
             return redirect('shops');
         }
         catch(Exception $exception)
         {
-
+            return redirect()->back()->withInput($request->all())->withErrors($exception->getMessage());
         }
     }
-    public function edit($id)
+    public function edit(Shop $shop)
+    {
+        $users = User::where('role', 'manager')->get();
+        return view('shops.edit', compact('shop','users'));
+    }
+    public function update(Shop $shop, Request $request)
     {
         try
         {
-            $shop = Shop::findOrFail($id);
-            return view('shops.edit', compact('shop'));
-        }
-        catch (\Exception $ex)
-        {
-            return redirect('shops')->withErrors($ex->getMessage());
-        }
-
-    }
-    public function update($id, Request $request)
-    {
-        try
-        {
-            $this->repo->update($id, $request);
+            $request->validate(Shop::rules);
+            $this->repo->update($shop, $request);
             return redirect('shops');
         }
         catch (\Exception $ex)
         {
-            return redirect('shops')->withErrors($ex->getMessage());
+            return redirect()->back()->withInput($request->all())->withErrors($ex->getMessage());
         }
     }
-    public function destroy($id)
+    public function destroy(Shop $shop)
     {
         try
         {
-            $this->repo->delete($id);
+            $shop->delete();
             return redirect('shops');
         }
         catch (\Exception $ex)
         {
-            return redirect('shops')->withErrors($ex->getMessage());
+            return redirect()->back()->withErrors($ex->getMessage());
         }
     }
 }

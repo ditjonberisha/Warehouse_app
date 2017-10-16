@@ -21,43 +21,31 @@ class UsersController extends Controller
         $users = $this->repo->getUsers();
         return view('users.index', compact('users'));
     }
-    public function show($id)
+    public function show(User $user)
     {
         try
         {
-            $user = User::findOrFail($id);
-            if(Auth::user()->role == 'admin' || Auth::user()->id == $id)
+            if(Auth::user()->role == 'admin' || Auth::user()->id == $user->id)
             {
                 return view('users.show', compact('user'));
+            }
+            else
+            {
+                return redirect()->back()->withErrors('You do not have access');
             }
         }
         catch (\Exception $ex)
         {
-            return redirect('users')->withErrors($ex->getMessage());
+            return redirect()->back()->withErrors($ex->getMessage());
         }
     }
     public function create()
     {
         return view('users.create');
     }
-    public function edit()
+    public function destroy(User $user)
     {
-
-    }
-    public function update()
-    {
-
-    }
-    public function destroy($id)
-    {
-        try
-        {
-            $user = User::destroy($id);
-            return view('users', compact('user'));
-        }
-        catch (\Exception $ex)
-        {
-            return redirect('users')->withErrors($ex->getMessage());
-        }
+        $user->delete();
+        return redirect('users');
     }
 }

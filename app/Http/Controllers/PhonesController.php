@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Repository\PhoneRepository;
 use Mockery\Exception;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Enum\PhoneConditionEnum;
 
 class PhonesController extends Controller
 {
@@ -19,69 +18,60 @@ class PhonesController extends Controller
 
     public function index(Request $request)
     {
-        $myShops = Auth::user()->myShops()->where('active', 1)->get();
-        $phones = $this->repo->getPhones($request, $myShops);
+        $phones = $this->repo->getPhones($request);
         $search = $request->search;
         return view('phones.index', compact('phones', 'search'));
     }
-    public function show($id)
+    public function show(Phone $phone)
     {
-        $myShops = Auth::user()->myShops()->where('active', 1)->get();
-        $phone = Phone::findOrFail($id);
+        $myShops = Auth::user()->myShops();
         if(!in_array($phone->shop_id, $myShops->pluck('id')->toArray()))
-        {
-            throw new \Exception('You do not have access');
-        }
+            return redirect()->back()->withErrors('You do not have access');
         return view('phones.show', compact('phone'));
     }
     public function create()
     {
-        $myShops = Auth::user()->myShops()->where('active', 1)->get();
+        $myShops = Auth::user()->myShops();
         return view('phones.create',compact('myShops'));
     }
     public function store(Request $request)
     {
         try
         {
-            $myShops = Auth::user()->myShops()->where('active', 1)->get();
-            $this->repo->insert($request, $myShops);
+            $request->validate(Phone::rules);
+            $this->repo->insert($request);
             return redirect('phones');
         }
         catch(Exception $exception)
         {
-            throw new \Exception('Gabim.');
+            return redirect()->back()->withErrors($exception->getMessage());
         }
     }
-    public function edit($id)
+    public function edit(Phone $phone)
     {
-
-        $myShops = Auth::user()->myShops()->where('active', 1)->get();
-        $phone = Phone::findOrFail($id);
+        $myShops = Auth::user()->myShops();
         if(!in_array($phone->shop_id, $myShops->pluck('id')->toArray()))
-        {
-            throw new \Exception('You do not have access');
-        }
+            return redirect()->back()->withErrors('You do not have access');
         return view('phones.edit', compact('phone','myShops'));
     }
-    public function update($id, Request $request)
+    public function update(Phone $phone, Request $request)
     {
         try
         {
-            $shops = Auth::user()->myShops()->where('active', 1)->get();
-            $this->repo->update($id, $request, $shops);
-            return redirect('phones')->with('Phone updated successfullu');
+            $request->validate(Phone::rules);
+            $this->repo->update($phone, $request);
+            return redirect('phones')->with('Phone updated successfully');
         }
         catch(Exception $exception)
         {
-            throw new \Exception('Gabim.');
+            return redirect()->back()->withErrors($exception->getMessage());
         }
     }
-    public function destroy($id)
+    public function destroy(Phone $phone)
     {
         try
         {
-            $myShops = Auth::user()->myShops()->where('active', 1)->get();
-            $this->repo->delete($id, $myShops);
+            $this->repo->delete($phone);
             return redirect('phones');
         }
         catch(Exception $exception)

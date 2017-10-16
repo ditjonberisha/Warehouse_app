@@ -12,20 +12,27 @@
                             <form role="form" action="/shops" method="post">
                                 <div class="form-group">
                                     <label>Name</label>
-                                    <input name="name" class="form-control">
+                                    <input value="{{ old('name') }}" name="name" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label>Country</label>
-                                    <input name="country" class="form-control">
+                                    <input value="{{ old('country') }}" name="country" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label>City</label>
-                                    <input name="city" class="form-control">
+                                    <input value="{{ old('city') }}" name="city" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Shop managers</label>
+                                    <select multiple="" name="user_ids[]" class="form-control">
+                                        @foreach($users as $user)
+                                            <option value="{{ $user->id }}">{{ $user->email }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <button type="submit" class="btn btn-default">Create</button>
                             </form>
                         </div>
-
                     </div>
                     <!-- /.row (nested) -->
                 </div>

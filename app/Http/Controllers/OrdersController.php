@@ -16,46 +16,43 @@ class OrdersController extends Controller
     }
     public function index(Request $request)
     {
-        $myShops = Auth::user()->myShops()->where('active', 1)->get();
-        $orders = $this->repo->getOrders($request, $myShops);
+        $orders = $this->repo->getOrders($request);
         $search = $request->search;
         $from = $request->from;
         $to = $request->to;
         return view('orders.index', compact('orders', 'from', 'to', 'search'));
     }
-    public function show($id)
+    public function show(Order $order)
     {
-        $myShops = Auth::user()->myShops()->where('active', 1)->get();
-        $order = $this->repo->getOrder($id, $myShops);
+        $order = $this->repo->getOrder($order);
         return view('orders.show', compact('order'));
     }
-    public function edit($id)
+    public function edit(Order $order)
     {
-        $order = Order::findOrFail($id);
         return view('orders.edit', compact('order'));
     }
-    public function update($id, Request $request)
+    public function update(Order $order, Request $request)
     {
         try
         {
-            $this->repo->update($id, $request);
+            $this->repo->update($order, $request);
             return redirect('orders');
         }
         catch(Exception $exception)
         {
-            return redirect('orders')->withErrors($exception->getMessage());
+            return redirect()->back()->withInput()->withErrors($exception->getMessage());
         }
     }
-    public function destroy($id)
+    public function destroy(Order $order)
     {
         try
         {
-            $this->repo->delete($id);
+            $this->repo->delete($order);
             return redirect('orders');
         }
         catch (\Exception $ex)
         {
-            return redirect('orders')->withErrors($ex->getMessage());
+            return redirect()>back()->withErrors($ex->getMessage());
         }
     }
 }
