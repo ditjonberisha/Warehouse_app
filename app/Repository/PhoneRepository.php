@@ -105,6 +105,7 @@ class PhoneRepository
 
         $phone->delete();
     }
+
     public function deletePhotos($photos)
     {
         $length = count($photos);
