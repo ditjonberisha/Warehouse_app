@@ -78,5 +78,7 @@
             <!-- /.panel -->
         </div>
     </div>
+
     @include('partials._confirm', ['action'=>"/phones/$phone->id", 'model'=>'phone'])
+
 @endsection

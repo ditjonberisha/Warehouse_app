@@ -10,6 +10,7 @@ class FileHelper
         $path = Storage::putFileAs($dir, $file, $filename.'.'.$file->getClientOriginalExtension());
         return $path;
     }
+
     public static function deleteFile($filename)
     {
         Storage::delete($filename);

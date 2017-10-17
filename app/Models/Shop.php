@@ -10,7 +10,7 @@ class Shop extends Model
 
     const rules =
         [
-            'name' => 'required|alpha',
+            'name' => 'required',
             'country' => 'required|alpha',
             'city'  => 'required|alpha',
         ];
@@ -24,10 +24,10 @@ class Shop extends Model
     {
         return $this->belongsToMany('App\Models\User');
     }
+
     public function delete()
     {
         $this->phones()->delete();
         return parent::delete();
     }
-
 }

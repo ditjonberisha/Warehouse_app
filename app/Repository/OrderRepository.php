@@ -31,6 +31,7 @@ class OrderRepository
             $orders = Order::join('phones', 'orders.phone_id', '=', 'phones.id')
                 ->whereIn('shop_id', $myShops->pluck('id'))->select(['orders.*']);
         }
+
         if(!empty($from) && !empty($to))
         {
             $orders = $orders->whereBetween('orders.created_at',
@@ -45,32 +46,40 @@ class OrderRepository
         {
             $orders = $orders->where('orders.created_at', '<=', Carbon::createFromFormat('d/m/Y', $to));
         }
+
         return $orders->get();
     }
+
     public function getOrder($order)
     {
         $myShops = Auth::user()->myShops();
+
         if(!in_array($order->phone->shop_id, $myShops->pluck('id')->toArray()))
         {
             throw new \Exception('You do not have access');
         }
+
         return $order;
     }
     public function update($order, Request $request)
     {
         $myShops = $request->user()->myShops();
         $orderData = $request->toArray();
+
         if(!in_array($order->phone->shop_id, $myShops->pluck('id')->toArray()))
         {
             return redirect()->back()->withErrors('You do not have access');
         }
+
         if($orderData['status'] == OrderStatusEnum::Sold && empty($orderData['soldOrderId']))
         {
             throw new \Exception('Please fill the sale order id');
         }
+
         $orderData['status'] = strtolower(OrderStatusEnum::getValue($orderData['status']));
         $order->update($orderData);
     }
+
     public function delete($order)
     {
         $order->phone()->dissociate();

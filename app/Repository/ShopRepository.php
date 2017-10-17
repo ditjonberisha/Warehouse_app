@@ -11,6 +11,7 @@ class ShopRepository
         $shopData = $request->toArray();
         $shop->fill($shopData);
         $shop->save();
+
         if(count($request->user_ids) > 0)
         {
             foreach($request->user_ids as $user_id)
@@ -25,6 +26,7 @@ class ShopRepository
         $shopData = $request->toArray();
         $shop->update($shopData);
         $shop->users()->detach();
+
         if(count($request->user_ids) > 0)
         {
             foreach($request->user_ids as $user_id)

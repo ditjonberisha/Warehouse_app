@@ -35,5 +35,7 @@
             </div>
         </div>
     </div>
+
     @include('partials._confirm', ['action'=>"/shops/$shop->id", 'model'=>'shop'])
+
 @endsection

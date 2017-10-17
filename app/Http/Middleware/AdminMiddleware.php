@@ -19,6 +19,7 @@ class AdminMiddleware
         {
             return $next($request);
         }
+
         return redirect()->back()->withErrors('You do not have access');
     }
 }

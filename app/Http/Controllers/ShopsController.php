@@ -20,23 +20,29 @@ class ShopsController extends Controller
     public function index(Request $request)
     {
         $shops = Auth::user()->myShops();
+
         return view('shops.index', compact('shops'));
     }
+
     public function show(Shop $shop)
     {
         return view('shops.show', compact('shop'));
     }
+
     public function create()
     {
         $users = User::where('role', 'manager')->get();
+
         return view('shops.create', compact('users'));
     }
+
     public function store(Request $request)
     {
         try
         {
             $request->validate(Shop::rules);
             $this->repo->insert($request);
+
             return redirect('shops');
         }
         catch(Exception $exception)
@@ -44,17 +50,21 @@ class ShopsController extends Controller
             return redirect()->back()->withInput($request->all())->withErrors($exception->getMessage());
         }
     }
+
     public function edit(Shop $shop)
     {
         $users = User::where('role', 'manager')->get();
+
         return view('shops.edit', compact('shop','users'));
     }
+
     public function update(Shop $shop, Request $request)
     {
         try
         {
             $request->validate(Shop::rules);
             $this->repo->update($shop, $request);
+
             return redirect('shops');
         }
         catch (\Exception $ex)
@@ -62,6 +72,7 @@ class ShopsController extends Controller
             return redirect()->back()->withInput($request->all())->withErrors($ex->getMessage());
         }
     }
+
     public function destroy(Shop $shop)
     {
         try
