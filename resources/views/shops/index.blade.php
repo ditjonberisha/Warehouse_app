@@ -16,9 +16,11 @@
                 <div class="panel-heading">
                     All shops
                 </div>
-                <div class="navbar-form navbar-right">
-                    <a href="/shops/create" class="btn btn-success" style="margin-right: 15px;">Add</a>
-                </div>
+                @if(Auth::user()->hasRole('admin'))
+                    <div class="navbar-form navbar-right">
+                        <a href="/shops/create" class="btn btn-success" style="margin-right: 15px;">Add</a>
+                    </div>
+                @endif
                 <!-- /.panel-heading -->
 
                 <div class="panel-body">

@@ -28,10 +28,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $onStock = Auth::user()->orders()->where('status', 'on stock')->count();
-        $beingRepaired = Auth::user()->orders()->where('status', 'being repaired')->count();
-        $toBeSold = Auth::user()->orders()->where('status', 'to be sold')->count();
-        $sold= Auth::user()->orders()->where('status', 'sold')->count();
+        $onStock = Auth::user()->myOrders()->where('status', 'on stock')->count();
+        $beingRepaired = Auth::user()->myOrders()->where('status', 'being repaired')->count();
+        $toBeSold = Auth::user()->myOrders()->where('status', 'to be sold')->count();
+        $sold= Auth::user()->myOrders()->where('status', 'sold')->count();
         return view('home.index', compact('onStock', 'beingRepaired', 'toBeSold', 'sold'));
     }
 }

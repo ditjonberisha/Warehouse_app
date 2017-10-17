@@ -49,7 +49,17 @@ class User extends Authenticatable
             return $this->shops()->get();
         }
     }
-
+    public function myOrders()
+    {
+        if ($this->role == 'admin')
+        {
+            return DB::table('orders')->get();
+        }
+        else
+        {
+            return $this->orders()->get();
+        }
+    }
     public function hasRole($role)
     {
         return $this->role == $role;

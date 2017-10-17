@@ -7,11 +7,9 @@
             <h1 class="page-header">
                 Shop Details
                 <div class="pull-right">
-                    <form method="post" action="/shops/{{ $shop->id }}">
-                        {{ csrf_field() }}
-                        <input type="hidden" name="_method" value="DELETE">
-                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                    </form>
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#myModal">Delete</button>
+                    </div>
                 </div>
             </h1>
         </div>
@@ -37,5 +35,5 @@
             </div>
         </div>
     </div>
-
+    @include('partials._confirm', ['action'=>"/shops/$shop->id", 'model'=>'shop'])
 @endsection

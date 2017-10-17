@@ -9,11 +9,7 @@
 
                 @if(Auth::user()->role == 'admin')
                     <div class="pull-right">
-                        <form method="post" action="/users/{{ $user->id }}">
-                            {{ csrf_field() }}
-                            <input type="hidden" name="_method" value="DELETE">
-                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                        </form>
+                        <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#myModal">Delete</button>
                     </div>
                 @endif
             </h1>
@@ -40,5 +36,5 @@
             </div>
         </div>
     </div>
-
+    @include('partials._confirm', ['action'=>"/users/$user->id", 'model'=>'user'])
 @endsection

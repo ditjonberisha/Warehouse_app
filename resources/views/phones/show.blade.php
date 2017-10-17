@@ -7,11 +7,7 @@
                 Phone Details
 
                 <div class="pull-right">
-                    <form method="post" action="/phones/{{ $phone->id }}">
-                        {{ csrf_field() }}
-                        <input type="hidden" name="_method" value="DELETE">
-                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                    </form>
+                    <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#myModal">Delete</button>
                 </div>
             </h1>
         </div>
@@ -82,5 +78,5 @@
             <!-- /.panel -->
         </div>
     </div>
-
+    @include('partials._confirm', ['action'=>"/phones/$phone->id", 'model'=>'phone'])
 @endsection
