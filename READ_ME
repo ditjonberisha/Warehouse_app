@@ -7,3 +7,6 @@ Please execute the following commands to ensure the proper setup for the app to 
 5) customize your database connection in the .env file
 6) php artisan migrate
 7) php artisan storage:link
+8) to create a user for the first time, go to application_host/test. Example: if you are in localhost, go to localhost/test. A user with the following credentials will be created:
+email => admin@gmail.com
+password => 12345678
