@@ -5,6 +5,7 @@ namespace App\Models\Enum;
 abstract class OrderStatusEnum
 {
     const OnStock = 0, BeingRepaired = 1, ToBeSold = 2, Sold = 3;
+
     static function getValue($number)
     {
         switch ($number)
@@ -19,6 +20,7 @@ abstract class OrderStatusEnum
             default: return "On Stock";
         }
     }
+
     static function getNumber($value)
     {
         switch ($value)

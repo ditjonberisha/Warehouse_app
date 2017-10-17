@@ -32,6 +32,7 @@ class HomeController extends Controller
         $beingRepaired = Auth::user()->myOrders()->where('status', 'being repaired')->count();
         $toBeSold = Auth::user()->myOrders()->where('status', 'to be sold')->count();
         $sold= Auth::user()->myOrders()->where('status', 'sold')->count();
+
         return view('home.index', compact('onStock', 'beingRepaired', 'toBeSold', 'sold'));
     }
 }

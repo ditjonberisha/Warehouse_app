@@ -15,11 +15,14 @@ class UsersController extends Controller
 
         $this->repo = new UserRepository();
     }
+
     public function index()
     {
         $users = $this->repo->getUsers();
+
         return view('users.index', compact('users'));
     }
+
     public function show(User $user)
     {
         try
@@ -38,13 +41,16 @@ class UsersController extends Controller
             return redirect()->back()->withErrors($ex->getMessage());
         }
     }
+
     public function create()
     {
         return view('users.create');
     }
+
     public function destroy(User $user)
     {
         $user->delete();
+
         return redirect('users');
     }
 }

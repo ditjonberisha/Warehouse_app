@@ -57,6 +57,7 @@ use App\Models\Enum\OrderStatusEnum;
         </div>
         <!-- /.col-lg-12 -->
     </div>
+
     <script>
         $(document).ready(function(){
             $('#order_status').change(function(){

@@ -68,8 +68,10 @@
                 <!-- /.panel-heading -->
                 <div class="panel-body">
                     @foreach($phone->photos as $photo)
-                        <div class="col-lg-6">
-                            <img width="100%" height="100%" src="{{ Storage::url($photo->path) }}">
+                        <div class=" col-lg-12" style="margin-bottom: 20px;">
+                            <div class="col-lg-offset-3 col-lg-6">
+                                <img style="border: 1px solid black;" width="100%" height="100%" src="{{ Storage::url($photo->path) }}">
+                            </div>
                         </div>
                     @endforeach
                 </div>
@@ -78,5 +80,7 @@
             <!-- /.panel -->
         </div>
     </div>
+
     @include('partials._confirm', ['action'=>"/phones/$phone->id", 'model'=>'phone'])
+
 @endsection

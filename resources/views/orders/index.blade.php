@@ -80,6 +80,7 @@
         <!-- /.col-lg-12 -->
         </div>
     </div>
+
     <script>
         $('#from').datepicker( {format: 'yyyy/mm/dd'});
         $('#to').datepicker({format: 'yyyy/mm/dd'});

@@ -32,11 +32,11 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Models\Shop');
     }
+
     public function orders()
     {
         return $this->hasMany('App\Models\Order');
     }
-
 
     public function myShops()
     {
@@ -49,6 +49,7 @@ class User extends Authenticatable
             return $this->shops()->get();
         }
     }
+
     public function myOrders()
     {
         if ($this->role == 'admin')
@@ -60,10 +61,12 @@ class User extends Authenticatable
             return $this->orders()->get();
         }
     }
+
     public function hasRole($role)
     {
         return $this->role == $role;
     }
+
     public function delete()
     {
         $this->orders()->delete();

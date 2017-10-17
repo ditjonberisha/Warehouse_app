@@ -14,7 +14,6 @@ class OrderRepository
     {
         $myShops = Auth::user()->myShops();
         $GLOBALS['search'] = strtolower($search);
-
         if(!empty($GLOBALS['search']))
         {
             $orders = Order::join('phones', 'orders.phone_id', '=', 'phones.id')->where(

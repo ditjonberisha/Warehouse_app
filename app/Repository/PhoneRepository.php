@@ -14,6 +14,7 @@ class PhoneRepository
     {
         $myShops = Auth::user()->myShops();
         $GLOBALS['search'] = strtolower($search);
+
         if(!empty($GLOBALS['search']))
         {
             $phones = Phone::where(function($query){
@@ -29,18 +30,22 @@ class PhoneRepository
         {
             $phones = Phone::whereIn('shop_id', $myShops->pluck('id'));
         }
+
         return $phones->get();
     }
+
     public function insert(Request $request)
     {
         $myShops = Auth::user()->myShops();
         $phone = new Phone();
         $phoneData = $request->all();
         $phone->fill($phoneData);
+
         if (!in_array($phone['shop_id'], $myShops->pluck('id')->toArray()))
         {
             throw new \Exception('You do not have access to this shop!');
         }
+
         $phone->condition = PhoneConditionEnum::getValue($phone->condition);
         $phone->save();
 
@@ -50,6 +55,7 @@ class PhoneRepository
 
         $photos = $request->photos;
         $photos_count = count($photos);
+
         for ($i = 0; $i < $photos_count; $i++)
         {
             $photo = new Photo();
@@ -58,14 +64,17 @@ class PhoneRepository
             $phone->photos()->save($photo);
         }
     }
+
     public function update($phone, Request $request)
     {
         $myShops = Auth::user()->myShops();
         $phoneData = $request->except('status');
+
         if (!in_array($phone['shop_id'], $myShops->pluck('id')->toArray()))
         {
             return redirect()->back()->withErrors('You do not have access');
         }
+
         $phoneData['condition'] = PhoneConditionEnum::getValue($phoneData['condition']);
         $phone->update($phoneData);
 
@@ -87,11 +96,13 @@ class PhoneRepository
     public function delete($phone)
     {
         $myShops = Auth::user()->myShops();
+
         if(!in_array($phone->shop_id, $myShops->pluck('id')->toArray()))
         {
             throw new \Exception('You do not have access');
         }
         $this->deletePhotos($phone->photos);
+
         $phone->delete();
     }
     public function deletePhotos($photos)

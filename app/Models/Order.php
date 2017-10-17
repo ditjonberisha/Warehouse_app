@@ -12,6 +12,7 @@ class Order extends Model
     {
         return $this->belongsTo('App\Models\Phone');
     }
+
     public function user()
     {
         return $this->belongsTo('App\Models\User');

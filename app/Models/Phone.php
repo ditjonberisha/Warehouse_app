@@ -26,14 +26,17 @@ class Phone extends Model
     {
         return $this->hasMany('App\Models\Photo');
     }
+
     public function shop()
     {
         return $this->belongsTo('App\Models\Shop');
     }
+
     public function order()
     {
         return $this->hasOne('App\Models\Order');
     }
+
     public function delete()
     {
         $this->order()->delete();
