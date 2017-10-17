@@ -1,0 +1,9 @@
+Please execute the following commands to ensure the proper setup for the app to run.
+
+1) composer install
+2) npm install
+3) cp .env.example .env
+4) php artisan key:generate
+// customize your database connection in the .env file
+5) php artisan migrate
+6) php artisan storage:link
