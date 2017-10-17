@@ -37,8 +37,9 @@ class PhoneRepository
     public function insert(Request $request)
     {
         $myShops = Auth::user()->myShops();
-        $phone = new Phone();
         $phoneData = $request->all();
+
+        $phone = new Phone();
         $phone->fill($phoneData);
 
         if (!in_array($phone['shop_id'], $myShops->pluck('id')->toArray()))
@@ -108,12 +109,10 @@ class PhoneRepository
 
     public function deletePhotos($photos)
     {
-        $length = count($photos);
-        for ($i = 0; $i < $length; $i++)
+        $count = count($photos);
+        for ($i = 0; $i < $count; $i++)
         {
-            $photo = $photos[$i];
-            FileHelper::deleteFile($photo->path);
-            $photo->forceDelete();
+            FileHelper::deleteFile($photos[$i]->path);
         }
     }
 }
