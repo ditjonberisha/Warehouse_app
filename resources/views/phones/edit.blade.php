@@ -22,7 +22,7 @@ use App\Models\Enum\PhoneConditionEnum;
                 </div>
                 <div class="panel-body">
                     <div class="col-lg-12">
-                        <form role="form" action="/phones/{{ $phone->id }}" method="post">
+                        <form role="form" action="/phones/{{ $phone->id }}" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="_method" value="PUT">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
@@ -92,7 +92,7 @@ use App\Models\Enum\PhoneConditionEnum;
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>File input</label>
-                                    <input type="file">
+                                    <input type="file" multiple="multiple" name="photos[]">
                                 </div>
                             </div>
                             <div class="col-lg-offset-6 col-lg-6">
