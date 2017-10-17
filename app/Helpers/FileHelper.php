@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Storage;
 
 class FileHelper
 {
-    public static function createFile($file, $dir, $filename)
+    public static function createFile($dir, $file, $filename)
     {
         $path = Storage::putFileAs($dir, $file, $filename.'.'.$file->getClientOriginalExtension());
         return $path;

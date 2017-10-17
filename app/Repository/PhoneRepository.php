@@ -53,7 +53,7 @@ class PhoneRepository
         for ($i = 0; $i < $photos_count; $i++)
         {
             $photo = new Photo();
-            $path = FileHelper::createFile($photos[$i], "public/phone_photos", time()."$i");
+            $path = FileHelper::createFile("public/phone_photos", $photos[$i], time()."$i");
             $photo->path = $path;
             $phone->photos()->save($photo);
         }
@@ -77,7 +77,7 @@ class PhoneRepository
             for ($i = 0; $i < $photos_count; $i++)
             {
                 $photo = new Photo();
-                $path = FileHelper::createFile($photos[$i], "storage/phone_photos", time());
+                $path = FileHelper::createFile("public/phone_photos", $photos[$i], time()."$i");
                 $photo->path = $path;
                 $phone->photos()->save($photo);
             }
@@ -91,7 +91,18 @@ class PhoneRepository
         {
             throw new \Exception('You do not have access');
         }
+        $this->deletePhotos($phone->photos);
         $phone->delete();
+    }
+    public function deletePhotos($photos)
+    {
+        $length = count($photos);
+        for ($i = 0; $i < $length; $i++)
+        {
+            $photo = $photos[$i];
+            FileHelper::deleteFile($photo->path);
+            $photo->forceDelete();
+        }
     }
 }
 ?>

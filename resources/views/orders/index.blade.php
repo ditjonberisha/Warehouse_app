@@ -64,7 +64,7 @@
                                 <td>{{ $order->status }}</td>
                                 <td>{{ $order->soldOrderId }}</td>
                                 <td>{{ $order->phone->customer_email }}</td>
-                                <td>{{ date('d/m/Y', strtotime($order->created_at)) }}</td>
+                                <td>{{ date('Y/m/d', strtotime($order->created_at)) }}</td>
                                 <td>
                                     &nbsp;<a href="/orders/{{ $order->id }}" ><i class="fa fa-search" aria-hidden="true"></i></a>&nbsp;&nbsp;
                                     <a href="/orders/{{ $order->id }}/edit" ><i class="fa fa-edit" aria-hidden="true"></i></a>
@@ -81,7 +81,7 @@
         </div>
     </div>
     <script>
-        $('#from').datepicker( {format: 'dd/mm/yyyy'});
-        $('#to').datepicker({format: 'dd/mm/yyyy'});
+        $('#from').datepicker( {format: 'yyyy/mm/dd'});
+        $('#to').datepicker({format: 'yyyy/mm/dd'});
     </script>
 @stop

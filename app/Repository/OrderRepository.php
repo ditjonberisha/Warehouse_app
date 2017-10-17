@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
-use Mockery\Exception;
+use Illuminate\Support\Facades\DB;
 
 class OrderRepository
 {
@@ -14,6 +14,7 @@ class OrderRepository
     {
         $myShops = Auth::user()->myShops();
         $GLOBALS['search'] = strtolower($search);
+
         if(!empty($GLOBALS['search']))
         {
             $orders = Order::join('phones', 'orders.phone_id', '=', 'phones.id')->where(
@@ -31,20 +32,16 @@ class OrderRepository
             $orders = Order::join('phones', 'orders.phone_id', '=', 'phones.id')
                 ->whereIn('shop_id', $myShops->pluck('id'))->select(['orders.*']);
         }
-        if(!empty($from) && !empty($to))
+
+        if(!empty($from))
         {
-            $orders = $orders->whereBetween('orders.created_at',
-                [Carbon::createFromFormat('!d/m/Y', $from),
-                    Carbon::createFromFormat('d/m/Y', $to)]);
+            $orders = $orders->where('orders.created_at', '>=', $from.' 00:00:00');
         }
-        elseif(!empty($from))
+        if(!empty($to))
         {
-            $orders = $orders->where('orders.created_at', '>=', Carbon::createFromFormat('!d/m/Y', $from));
+            $orders = $orders->where('orders.created_at', '<=', $to.' 23:59:59');
         }
-        elseif(!empty($to))
-        {
-            $orders = $orders->where('orders.created_at', '<=', Carbon::createFromFormat('d/m/Y', $to));
-        }
+
         return $orders->get();
     }
     public function getOrder($order)
